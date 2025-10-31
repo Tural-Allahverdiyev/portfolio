@@ -1,0 +1,860 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #0a0a0a 0%, #121212 100%);
+  color: #f2f2f2;
+  line-height: 1.6;
+  transition: background 0.4s ease, color 0.4s ease;
+  overflow-x: hidden; /* scrol problemini də həll edir */
+}
+
+/* Top actions */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.theme-toggle {
+  background: #00ffd5;
+  color: #000;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 255, 213, 0.3);
+  transition: transform 0.2s, background 0.3s;
+}
+.theme-toggle:hover {
+  transform: scale(1.1);
+  background: #00e0c2;
+}
+.lang-toggle {
+  background: #00ffd5;
+  color: #000;
+  border: none;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 255, 213, 0.3);
+  transition: background 0.3s, transform 0.2s;
+}
+.lang-toggle:hover {
+  background: #00e0c2;
+  transform: scale(1.05);
+}
+
+/* Light mode */
+body.light {
+  background: #f5f5f5;
+  color: #111;
+}
+body.light .navbar {
+  background: rgba(255, 255, 255, 0.8);
+}
+body.light .btn {
+  background: linear-gradient(90deg, #0099ff, #00ffd5);
+}
+body.light .project {
+  background: rgba(0, 0, 0, 0.04);
+}
+body.light .project-info h3 {
+  color: #005a94;
+}
+
+/* Navbar */
+.navbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 40px;
+  background: rgba(15, 15, 15, 0.95);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding-right: 140px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.logo {
+  font-weight: 800;
+  font-size: 18px;
+  color: #fff;
+}
+.logo span {
+  color: #00ffd5;
+}
+.right-side {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  top: 70px;
+  right: -100%;
+  z-index: 1000;
+}
+.nav-links a {
+  position: relative;
+  text-decoration: none;
+  color: var(--text, #f3f3f3);
+  font-size: 15px;
+  font-weight: 500;
+  padding-bottom: 4px;
+  transition: color 0.3s ease;
+}
+.nav-links a:hover {
+  color: #00ffd5;
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background: #00ffd5; /* Neon-mavi-yaşıl ton */
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* CV dropdown */
+.cv-menu {
+  position: relative;
+}
+.cv-btn {
+  background: #00ffd5;
+  color: #000;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+.cv-btn:hover {
+  background: #00e0c2;
+  transform: translateY(-2px);
+}
+.cv-dropdown {
+  position: absolute;
+  top: 42px;
+  right: 0;
+  display: none;
+  flex-direction: column;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  min-width: 160px;
+  overflow: hidden;
+}
+.cv-dropdown a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 12px;
+  transition: background 0.2s;
+}
+.cv-dropdown a:hover {
+  background: #2b2b2b;
+}
+.cv-menu.open .cv-dropdown {
+  display: flex;
+}
+
+/* Hero */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: radial-gradient(circle at top left, #00ffd5 0%, #0f0f0f 70%);
+  padding: 0 20px;
+}
+.avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  border: 3px solid #00ffd5;
+  object-fit: cover;
+}
+.hero h1 {
+  font-size: 38px;
+  margin-bottom: 10px;
+}
+.highlight {
+  color: #00ffd5;
+}
+.role {
+  color: #ccc;
+  margin-bottom: 24px;
+}
+.btn {
+  display: inline-block;
+  background: linear-gradient(90deg, #00ffd5, #00b3ff);
+  color: #000;
+  padding: 12px 26px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s;
+}
+.btn:hover {
+  transform: scale(1.05);
+}
+
+/* Sections */
+.section {
+  background: rgba(40, 40, 40, 0.4);
+  backdrop-filter: blur(6px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 100px 20px;
+}
+.section h2 {
+  text-align: center;
+  color: #00ffd5;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+.section p.about-text {
+  text-align: center;
+  color: #ddd;
+}
+body.light .section p.about-text {
+  color: #333;
+}
+
+/* Projects */
+.project {
+  display: flex;
+  flex-wrap: wrap;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  margin-top: 20px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.project:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
+}
+.project img {
+  width: 100%;
+  max-width: 320px;
+  object-fit: cover;
+}
+.project-info {
+  flex: 1;
+  padding: 20px;
+}
+.project-info h3 {
+  color: #00ffd5;
+}
+.project-info p {
+  margin: 10px 0;
+  color: #ccc;
+}
+.project-info a {
+  background: #00ffd5;
+  color: #000;
+  padding: 8px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+}
+.project-info a:hover {
+  background: #0ff;
+}
+
+/* Contact */
+.contact {
+  text-align: center;
+  padding: 100px 20px;
+  background: rgba(40, 40, 40, 0.3); /* az şəffaf fon */
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); /* bir az dərinlik */
+  max-width: 800px;
+  margin: 80px auto;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-actions {
+  margin: 24px 0;
+}
+
+.contact-btn {
+  background: linear-gradient(90deg, #00ffd5, #5bb3ff);
+  color: #000;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.contact-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 255, 213, 0.3);
+}
+
+/* Gizli bölmə */
+.contact-info {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+  animation: fadeIn 0.4s ease;
+}
+
+.contact-info.show {
+  display: flex;
+}
+
+.contact-link {
+  color: #059278;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.contact-link:hover {
+  color: #5bb3ff;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.socials {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.socials a {
+  color: #00ffd5;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.socials a:hover {
+  color: #fff;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #000;
+  color: #666;
+  font-size: 14px;
+}
+
+body.light .navbar {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+body.light .logo {
+  color: #111;
+}
+body.light .logo span {
+  color: #00b3ff;
+}
+
+body.light .nav-links a {
+  color: #111;
+}
+body.light .nav-links a::after {
+  background: #00b3ff;
+}
+body.light .nav-links a:hover {
+  color: #00b3ff;
+}
+
+/* hero mətnləri açıq rejimdə də oxunaqlı olsun */
+body.light .hero {
+  background: linear-gradient(135deg, #f7fffe, #e9eff1);
+}
+body.light .hero h1 {
+  color: #111;
+}
+body.light .highlight {
+  color: #00b3ff;
+}
+body.light .role {
+  color: #555;
+}
+
+/* bölmə başlıqları və mətin kontrastı */
+
+body.light .section,
+body.light .contact {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+body.light .section h2 {
+  color: #00b3ff;
+}
+body.light .section p.about-text {
+  color: #333;
+}
+
+/* layihə kartları */
+body.light .project {
+  background: rgba(0, 0, 0, 0.04);
+}
+body.light .project-info h3 {
+  color: #005a94;
+}
+body.light .project-info p {
+  color: #444;
+}
+
+/* 🍔 Burger icon */
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  cursor: pointer;
+  z-index: 2000;
+}
+.burger span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: #00ffd5;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Burger açılarkən animasiya */
+
+.burger.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.burger.active span:nth-child(2) {
+  opacity: 0;
+}
+.burger.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* 🌞 Light rejimdə CV menyusunu düzəlt */
+body.light .cv-dropdown {
+  background: #ffffff; /* ağ fon */
+  border: 1px solid #ccc; /* açıq sərhəd */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+body.light .cv-dropdown a {
+  color: #000; /* tünd yazı */
+  background: transparent;
+}
+
+body.light .cv-dropdown a:hover {
+  background: #00b3ff; /* hover zamanı mavi fon */
+  color: #fff;
+}
+/* 🌞 Light rejimdə əlaqə bölməsi */
+body.light .contact h2 {
+  color: #007acc; /* mavi başlıq */
+}
+
+body.light .contact p {
+  color: #111; /* qara mətn */
+}
+
+body.light .contact .btn {
+  background: linear-gradient(90deg, #00b3ff, #00ffd5);
+  color: #000; /* qara yazı */
+}
+
+body.light .socials a {
+  color: #007acc; /* daha tünd linklər */
+}
+body.light .socials a:hover {
+  color: #00b3ff;
+}
+
+body.light .nav-links {
+  background: rgba(255, 255, 255, 0.95);
+}
+body.light .nav-links a {
+  color: #111;
+}
+body.light .burger span {
+  background: #00b3ff;
+}
+
+/* 🌞 Apple-style Light Mode üçün ümumi fon və yumşaq effektlər */
+body.light {
+  background: linear-gradient(180deg, #fefefe 0%, #f6f7f8 100%);
+  color: #111;
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+/* Navbar üçün incə şəffaflıq və kölgə */
+body.light .navbar {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Hero bölməsi – gradient və dərinlik effekti */
+body.light .hero {
+  background: linear-gradient(180deg, #ffffff 0%, #f1f3f4 100%);
+  box-shadow: inset 0 -8px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Bölmələr arasında incə ayırıcı və kölgə */
+body.light .section {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+  padding: 60px 24px;
+  margin-bottom: 60px;
+  transition: all 0.3s ease;
+}
+body.light .section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* Layihə kartları */
+body.light .project {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+body.light .project:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Kontakt hissəsi üçün gradient düymə */
+body.light .contact .btn {
+  background: linear-gradient(90deg, #00b3ff, #00ffd5);
+  color: #000;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 179, 255, 0.3);
+}
+body.light .contact .btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(0, 179, 255, 0.45);
+}
+
+/* Footer və yazılar */
+body.light footer {
+  background: linear-gradient(180deg, #f8f8f8 0%, #f0f0f0 100%);
+  color: #555;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+/* 🌫️  GLASSMORPHISM EFFEKTİ (Apple tərzi dərinlik) */
+body.light {
+  background: radial-gradient(circle at top left, #ffffff 0%, #e8eef2 100%);
+  color: #111;
+  backdrop-filter: blur(6px);
+}
+
+/* 🌫️ Navbar — şəffaf və parlaq görünüş */
+body.light .navbar {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ✨ Hero hissəsi — parıltı və dərinlik */
+body.light .hero {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.6),
+    rgba(245, 247, 248, 0.8)
+  );
+  box-shadow: inset 0 -8px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 0 0 40px 40px;
+}
+
+/* 🧊 Bölmələr — yarı şəffaf “glass card” hissi */
+body.light .section {
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: all 0.4s ease;
+}
+body.light .section:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* 💎 Layihə kartları */
+body.light .project {
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 18px;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+body.light .project:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* 📩 Əlaqə bölməsi */
+body.light .contact {
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  padding: 40px 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+/* 🌈 Footer — yumşaq kölgə və gradient */
+body.light footer {
+  background: linear-gradient(180deg, #f9f9f9 0%, #f1f1f1 100%);
+  color: #555;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* 🍔 Burger menyu üçün fade + slide animasiyası */
+
+/* Menyu açıldıqda görünən animasiya */
+@keyframes slideFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Menyu bağlanarkən yoxa çıxma animasiyası */
+@keyframes slideFadeOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+}
+
+/* 📄 CV dropdown üçün animasiya (fade + slide) */
+
+/* açılarkən görünmə animasiyası */
+@keyframes cvFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* bağlanarkən yavaş yox olma */
+@keyframes cvFadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+/* əsas görünüş */
+.cv-dropdown {
+  position: absolute;
+  top: 42px;
+  right: 0;
+  display: none;
+  flex-direction: column;
+  background: rgba(25, 25, 25, 0.95);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  animation: cvFadeIn 0.3s ease forwards;
+  transform-origin: top right;
+  z-index: 200;
+}
+
+/* açıq vəziyyət */
+.cv-menu.open .cv-dropdown {
+  display: flex;
+  animation: cvFadeIn 0.3s ease forwards;
+}
+
+/* bağlananda yumşaq fade-out */
+.cv-dropdown.closing {
+  animation: cvFadeOut 0.3s ease forwards;
+}
+
+/* linklər */
+.cv-dropdown a {
+  padding: 10px 14px;
+  color: #fff;
+  text-decoration: none;
+  background: transparent;
+  transition: background 0.3s, color 0.3s;
+}
+.cv-dropdown a:hover {
+  background: #00ffd5;
+  color: #000;
+}
+
+/* Light mode uyğunlaşması */
+body.light .cv-dropdown {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+body.light .cv-dropdown a {
+  color: #000;
+}
+body.light .cv-dropdown a:hover {
+  background: #00b3ff;
+  color: #fff;
+}
+
+/* 🌫️ Overlay (menyu açıldıqda fonu qaraldır) */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3); /* tünd şəffaf fon */
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  z-index: 900; /* menyunun arxasında */
+}
+
+/* Açıq vəziyyətdə görünür */
+.overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Light mode üçün azca fərqli */
+body.light .overlay {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.email-box {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 12px 20px;
+  margin-top: 10px;
+  animation: fadeIn 0.3s ease;
+}
+
+.email-box.show {
+  display: flex;
+}
+
+#emailText {
+  font-weight: 600;
+  color: #00ffd5;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 16px;
+  border-radius: 10px;
+  word-break: break-all;
+}
+
+.email-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.mini-btn {
+  background: linear-gradient(90deg, #00ffd5, #5bb3ff);
+  border: none;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.mini-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 10px rgba(0, 255, 213, 0.3);
+}
+
+/* İkinci email düyməsi dizaynı */
+.contact-btn.secondary {
+  background: linear-gradient(90deg, #5bb3ff, #a3ffd3);
+  color: #000;
+}
+
+.contact-buttons {
+  display: flex;
+  flex-direction: column; /* alt-alta */
+  align-items: center;
+  gap: 16px;
+  margin: 32px 0;
+}

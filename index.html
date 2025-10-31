@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="az">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tural Allahverdiyev — Portfolio</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./responsive.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  </head>
+  <body>
+    <!-- Üst sağ: tema və dil -->
+
+    <!-- Naviqasiya -->
+    <nav class="navbar">
+      <div class="logo" data-i18n="brand">Tural <span>Allahverdiyev</span></div>
+      <div class="right-side">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#about" data-i18n="nav_about">Haqqımda</a></li>
+          <li><a href="#projects" data-i18n="nav_projects">Layihələr</a></li>
+          <li><a href="#contact" data-i18n="nav_contact">Əlaqə</a></li>
+          <li class="cv-menu">
+            <button class="cv-btn" id="cvBtn" data-i18n="nav_cv">CV</button>
+            <div class="cv-dropdown" id="cvDropdown">
+              <a
+                href="files/Tural-Allahverdiyev-CV-AZ.pdf"
+                download
+                data-i18n="cv_az"
+                >CV (AZ)</a
+              >
+              <a
+                href="files/Tural-Allahverdiyev-CV-EN.pdf"
+                download
+                data-i18n="cv_en"
+                >CV (EN)</a
+              >
+            </div>
+          </li>
+        </ul>
+        <div class="actions">
+          <button class="theme-toggle" id="themeBtn" aria-label="Theme">
+            🌙
+          </button>
+          <button class="lang-toggle" id="langBtn" aria-label="Language">
+            AZ
+          </button>
+          <div class="burger" id="burger">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero" data-aos="fade-up">
+      <img src="images/1[1].jpg" alt="Tural Allahverdiyev" class="avatar" />
+      <h1 data-i18n="hero_title">
+        Salam, mən <span class="highlight">Tural Allahverdiyev</span>
+      </h1>
+      <p class="role" data-i18n="hero_role">
+        Fullstack Developer • UI Enthusiast
+      </p>
+      <a href="#projects" class="btn" data-i18n="hero_cta">Layihələrimə bax</a>
+    </header>
+
+    <!-- Haqqımda / About -->
+    <section id="about" class="section" data-aos="fade-up">
+      <h2 data-i18n="about_title">Haqqımda</h2>
+      <p class="about-text" data-i18n="about_text">
+        <!-- Dinamik doldurulacaq (script.js) -->
+      </p>
+    </section>
+
+    <!-- Layihələr / Projects -->
+    <section id="projects" class="section" data-aos="fade-up">
+      <h2 data-i18n="projects_title">Layihələr</h2>
+
+      <div class="project">
+        <img src="./images/gym.png" alt="ShopCO" />
+        <div class="project-info">
+          <h3>IRON GYM</h3>
+          <p data-i18n="proj_shopco_desc">
+            HTML, CSS və JS ilə hazırladığım responsive GYM.
+          </p>
+          <a
+            href="https://tural-allahverdiyev.github.io/Project_2/"
+            target="_blank"
+            data-i18n="live_demo"
+            >Canlı bax</a
+          >
+        </div>
+      </div>
+
+      <div class="project">
+        <img src="./images/online.png" alt="ShopCO" />
+        <div class="project-info">
+          <h3>E-Market</h3>
+          <p data-i18n="proj_shopco_desc">
+            HTML, CSS və JS ilə hazırladığım responsive GYM.
+          </p>
+          <a
+            href="https://tural-allahverdiyev.github.io/Project_1/"
+            target="_blank"
+            data-i18n="live_demo"
+            >Canlı bax</a
+          >
+        </div>
+      </div>
+
+      <div class="project">
+        <img src="./images/calculator.png" alt="Calculator App" />
+        <div class="project-info">
+          <h3>Calculator</h3>
+          <p data-i18n="proj_calc_desc">
+            JavaScript ilə yazılmış müasir kalkulyator interfeysi.
+          </p>
+          <a
+            href="https://tural-allahverdiyev.github.io/calculator/"
+            target="_blank"
+            data-i18n="live_demo"
+            >Canlı bax</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Əlaqə / Contact -->
+    <section id="contact" class="section contact" data-aos="fade-up">
+      <h2 data-i18n="contact_title">Əlaqə</h2>
+      <p data-i18n="contact_text">Gəlin birlikdə əla nəsə yaradaq!</p>
+
+      <div class="contact-buttons">
+        <a href="tel:+994555479988" class="contact-btn" data-i18n="call_btn">
+          📞 Zəng et
+        </a>
+
+        <a
+          href="https://wa.me/994555479988"
+          target="_blank"
+          class="contact-btn"
+          data-i18n="whatsapp_btn"
+        >
+          💬 WhatsApp-da yaz
+        </a>
+
+        <button class="contact-btn" id="emailBtn" data-i18n="email_btn">
+          📧 Email
+        </button>
+
+        <!-- EMAIL QUTUSU -->
+
+        <div id="emailBox" class="email-box">
+          <p id="emailText">tallahverdiyev313@gmail.com</p>
+          <div class="email-actions">
+            <button id="copyEmail" class="mini-btn" data-i18n="copy_email">
+              📋 Kopyala
+            </button>
+            <a
+              href="mailto:tallahverdiyev313@gmail.com"
+              class="mini-btn"
+              data-i18n="send_email"
+              >📨 Buradan göndər</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="socials">
+        <a href="https://github.com/turaldev" target="_blank">GitHub</a>
+        <a
+          href="https://www.linkedin.com/in/tural-allahverdiyev-b9a4b0150/"
+          target="_blank"
+          >LinkedIn</a
+        >
+      </div>
+    </section>
+
+    <footer>
+      <p>© <span id="year"></span> Tural Allahverdiyev</p>
+    </footer>
+    <div class="overlay" id="overlay"></div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

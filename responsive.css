@@ -1,0 +1,191 @@
+@media (max-width: 900px) {
+  .navbar {
+    padding-right: 20px;
+  }
+  .right-side {
+    gap: 12px;
+  }
+
+  .actions {
+    gap: 8px;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    background: rgba(15, 15, 15, 0.98);
+    backdrop-filter: blur(8px);
+    flex-direction: column;
+    align-items: flex-start;
+    width: 70%;
+    height: calc(100vh - 70px);
+    padding: 40px 24px;
+    gap: 20px;
+    transition: right 0.4s ease;
+    z-index: 1500;
+  }
+
+  /* Açıldıqda */
+  .nav-links.open {
+    right: 0;
+    animation: slideFadeIn 0.5s ease forwards;
+  }
+  .nav-links.closing {
+    right: -100%;
+    animation: slideFadeOut 0.4s ease forwards;
+  }
+  /* Animasiya (yumşaq fade + slide) */
+  @keyframes slideFadeIn {
+    0% {
+      opacity: 0;
+      transform: translateX(40px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes slideFadeOut {
+    0% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(40px);
+    }
+  }
+
+  /* Hər link tək-tək çıxır */
+  .nav-links a {
+    opacity: 0;
+    animation: fadeInLink 0.6s ease forwards;
+  }
+  .nav-links.open a:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  .nav-links.open a:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .nav-links.open a:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  .nav-links.open a:nth-child(4) {
+    animation-delay: 0.4s;
+  }
+
+  @keyframes fadeInLink {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .burger {
+    display: flex;
+  }
+}
+
+@media (max-width: 700px) {
+  .navbar {
+    padding: 14px 20px;
+  }
+  .logo {
+    font-size: 18px;
+  }
+  .burger {
+    display: flex;
+  }
+
+  .actions {
+    gap: 14px; /* ikonlar arası məsafə */
+  }
+
+  /* Burgerin yeri və ölçüsü */
+  .burger {
+    width: 26px;
+    height: 20px;
+  }
+
+  /* Burger aktiv olanda (X vəziyyətində) daha az yaxın olsun */
+  .burger.active {
+    margin-right: 2px;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 70px;
+    right: -100%;
+    background: rgba(15, 15, 15, 0.95);
+    backdrop-filter: blur(10px);
+    flex-direction: column;
+    align-items: flex-start;
+    width: 70%;
+    height: calc(100vh - 70px);
+    padding: 40px 20px;
+    gap: 18px;
+    transition: right 0.4s ease;
+    z-index: 9999;
+  }
+
+  .nav-links.open {
+    right: 0;
+    animation: slideFadeIn 0.5s ease forwards;
+  }
+
+  .nav-links.closing {
+    animation: slideFadeOut 0.4s ease forwards;
+  }
+
+  .nav-links a {
+    opacity: 0;
+    animation: fadeInLink 0.6s ease forwards;
+    color: #fff;
+    font-size: 16px;
+  }
+
+  /* CV menyusu mobil üçün dik açılır */
+  .cv-menu {
+    width: 100%;
+  }
+  .cv-dropdown {
+    position: relative;
+    top: 0;
+    right: 0;
+    background: #222;
+    border: none;
+    box-shadow: none;
+  }
+  .cv-dropdown a {
+    text-align: left;
+    padding: 8px 0;
+  }
+  .nav-links.open a:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  .nav-links.open a:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .nav-links.open a:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  .nav-links.open a:nth-child(4) {
+    animation-delay: 0.4s;
+  }
+
+  @keyframes fadeInLink {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
