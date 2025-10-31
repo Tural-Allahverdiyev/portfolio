@@ -35,8 +35,7 @@ const i18n = {
     about_text:
       "Mən Tural Allahverdiyev, gənc olmasam da yeni başlayan bir Fullstack Developerəm. Müasir veb texnologiyalarla istifadəçi yönümlü, dinamik və funksional interfeyslər hazırlayıram. Məqsədim dizaynla funksionallığı birləşdirərək insanlara rahat, cəlbedici və işlək həllər təqdim etməkdir. Bu yolda özümə inanıram və düşünürəm ki, istənilən dizaynı qısa müddətdə funksional şəkildə həyata keçirə bilərəm. Keçmişdə mühasibatlıq və anbar idarəçiliyi kimi sahələrdə çalışmışam və bu təcrübələr mənə sistemli düşünmə, məsuliyyət və detallara diqqət kimi bacarıqlar qazandırıb. Daha ətraflı məlumat üçün CV faylımla tanış ola bilərsiniz.",
     projects_title: "Layihələr",
-    proj_shopco_desc:
-      "HTML, CSS və JS ilə hazırladığım responsive GYM.",
+    proj_shopco_desc: "HTML, CSS və JS ilə hazırladığım responsive GYM.",
     proj_calc_desc: "JavaScript ilə yazılmış müasir kalkulyator interfeysi.",
     contact_title: "Əlaqə",
     contact_text: "Gəlin birlikdə əla nəsə yaradaq!",
@@ -166,6 +165,7 @@ document.querySelectorAll(".nav-links a").forEach((link) => {
   link.addEventListener("click", () => {
     burger.classList.remove("active");
     navLinks.classList.remove("open");
+    overlay.classList.remove("active");
   });
 });
 
