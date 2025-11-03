@@ -65,6 +65,8 @@ const translations = {
       "Mən Tural Allahverdiyev, müasir veb texnologiyalarla işləməyi sevən bir Fullstack Developerəm. Məqsədim həm dizayn, həm də funksionallığı birləşdirərək istifadəçilərə estetik və praktik həllər təqdim etməkdir.",
     aboutP2:
       "HTML, CSS və JavaScript texnologiyaları ilə real layihələr hazırlayıram və hər yeni layihədə özümü bir addım daha təkmilləşdirməyə çalışıram.",
+    aboutP3:
+      "Mənim üçün bu, sadəcə kod yazmaq deyil — yeni ideyaları həyata keçirmək, hər dəfə bir az daha yaxşısını bacarmaq deməkdir.",
     aboutBtn: "Layihələrimə bax",
     contactTitle: "Əlaqə",
     contactText:
@@ -106,6 +108,9 @@ const translations = {
       "I am Tural Allahverdiyev, a Fullstack Developer passionate about modern web technologies. My goal is to combine design and functionality to deliver aesthetic and practical solutions.",
     aboutP2:
       "I build real-world projects with HTML, CSS, and JavaScript, always striving to improve my skills with each project.",
+    aboutP3:
+      "For me, this isn’t just about writing code — it’s about bringing new ideas to life and striving to be a little better with every project.",
+    aboutBtn: "View My Projects",
     aboutBtn: "View My Projects",
     contactTitle: "Contact",
     contactText:
@@ -186,6 +191,7 @@ function applyLanguage(lang) {
   const aboutPs = document.querySelectorAll(".about-text p");
   aboutPs[0].textContent = t.aboutP1;
   aboutPs[1].textContent = t.aboutP2;
+  aboutPs[2].textContent = t.aboutP3;
   document.querySelector(".about-text .btn-outline").textContent = t.aboutBtn;
 
   // Contact
