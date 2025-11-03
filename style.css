@@ -1,860 +1,946 @@
+/* === GLOBAL === */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-html {
-  scroll-behavior: smooth;
+  box-sizing: border-box;
 }
 
 body {
   font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #0a0a0a 0%, #121212 100%);
-  color: #f2f2f2;
-  line-height: 1.6;
-  transition: background 0.4s ease, color 0.4s ease;
-  overflow-x: hidden; /* scrol problemini də həll edir */
+  background: linear-gradient(135deg, #0c0f14, #12161d);
+  color: #f1f1f1;
+  transition: background 0.4s, color 0.4s;
+  overflow-x: hidden;
 }
 
-/* Top actions */
-.actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.theme-toggle {
-  background: #00ffd5;
-  color: #000;
-  border: none;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 17px;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 255, 213, 0.3);
-  transition: transform 0.2s, background 0.3s;
-}
-.theme-toggle:hover {
-  transform: scale(1.1);
-  background: #00e0c2;
-}
-.lang-toggle {
-  background: #00ffd5;
-  color: #000;
-  border: none;
-  border-radius: 999px;
-  padding: 8px 16px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 255, 213, 0.3);
-  transition: background 0.3s, transform 0.2s;
-}
-.lang-toggle:hover {
-  background: #00e0c2;
-  transform: scale(1.05);
-}
-
-/* Light mode */
-body.light {
-  background: #f5f5f5;
-  color: #111;
-}
-body.light .navbar {
-  background: rgba(255, 255, 255, 0.8);
-}
-body.light .btn {
-  background: linear-gradient(90deg, #0099ff, #00ffd5);
-}
-body.light .project {
-  background: rgba(0, 0, 0, 0.04);
-}
-body.light .project-info h3 {
-  color: #005a94;
-}
-
-/* Navbar */
+/* === NAVBAR === */
 .navbar {
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
+  padding: 18px 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 40px;
-  background: rgba(15, 15, 15, 0.95);
+  background: rgba(12, 15, 20, 0.9);
   backdrop-filter: blur(10px);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  padding-right: 140px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  z-index: 5000; /* ✅ HƏMİŞƏ ÜSTTƏ QALSIN */
 }
+
 .logo {
-  font-weight: 800;
-  font-size: 18px;
-  color: #fff;
-}
-.logo span {
-  color: #00ffd5;
-}
-.right-side {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 28px;
-  align-items: center;
-  top: 70px;
-  right: -100%;
-  z-index: 1000;
-}
-.nav-links a {
-  position: relative;
   text-decoration: none;
-  color: var(--text, #f3f3f3);
-  font-size: 15px;
-  font-weight: 500;
-  padding-bottom: 4px;
+  color: #f1f1f1;
+  font-weight: 800;
+  font-size: 20px;
+  cursor: pointer;
   transition: color 0.3s ease;
 }
+.logo span {
+  color: #00eaff;
+}
+.logo:hover span {
+  color: #00bfff;
+}
+
+/* NAV LINKS */
+.nav-links {
+  background: #0c0f14; /* headerlə eyni tünd fon */
+  backdrop-filter: none; /* blur effekti silirik */
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: -4px 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.nav-links a {
+  position: relative;
+  color: #f1f1f1;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
 .nav-links a:hover {
-  color: #00ffd5;
+  color: #00eaff;
+  text-shadow: 0 0 10px rgba(0, 234, 255, 0.6);
+  transform: translateX(4px); /* sağa azca hərəkət */
+}
+body.light .nav-links a:hover {
+  color: #007acc;
+  text-shadow: 0 0 8px rgba(0, 122, 204, 0.5);
+}
+.nav-links a.active {
+  color: #00eaff;
+  font-weight: 600;
 }
 .nav-links a::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: -4px;
   width: 0%;
   height: 2px;
-  background: #00ffd5; /* Neon-mavi-yaşıl ton */
+  background: #00eaff;
   transition: width 0.3s ease;
-  border-radius: 2px;
 }
 .nav-links a:hover::after {
   width: 100%;
 }
 
-/* CV dropdown */
+/* ACTION BUTTONS */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.theme-btn {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+.theme-btn:hover {
+  border-color: #00eaff;
+  color: #00eaff;
+}
+
+/* BURGER */
+/* === BURGER === */
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 26px;
+  height: 20px;
+  cursor: pointer;
+  position: relative;
+  z-index: 5000;
+  transition: transform 0.3s ease-in-out;
+}
+
+.burger span {
+  width: 100%;
+  height: 3px;
+  background: #f1f1f1;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* 🌙 Hover effekti */
+.burger:hover span {
+  background: #00eaff;
+  box-shadow: 0 0 10px #00eaff;
+  transform: scaleX(1.05);
+}
+
+body.light .burger:hover span {
+  background: #007acc;
+  box-shadow: 0 0 10px #007acc;
+}
+
+/* 🟢 Aktiv vəziyyət (burger açıq) */
+.burger.active span:nth-child(1) {
+  transform: rotate(45deg) translateY(7px);
+}
+.burger.active span:nth-child(2) {
+  opacity: 0;
+}
+.burger.active span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-7px);
+}
+
+/* Hover effekti aktivdə də işləsin */
+.burger.active:hover span {
+  background: #00eaff;
+  box-shadow: 0 0 10px #00eaff;
+}
+body.light .burger.active:hover span {
+  background: #007acc;
+  box-shadow: 0 0 10px #007acc;
+}
+
+/* === HERO === */
+
+.hero {
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(0, 234, 255, 0.1),
+    transparent 70%
+  );
+}
+
+.hero-content {
+  transform: translateY(-40px); /* bir az aşağıdan başlasın */
+}
+
+.hero h1 {
+  font-size: 46px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.hero h1 span {
+  color: #00eaff;
+}
+.hero p {
+  font-size: 18px;
+  color: #a9b3c1;
+  margin-bottom: 32px;
+}
+.cta-btn {
+  display: inline-block;
+  background: linear-gradient(90deg, #00eaff, #0085ff);
+  color: #000;
+  padding: 12px 28px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.cta-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 234, 255, 0.4);
+}
+
+/* === LIGHT MODE === */
+body.light {
+  background: linear-gradient(135deg, #f8f9fb, #e9eef2);
+  color: #111;
+}
+body.light .navbar {
+  background: rgba(255, 255, 255, 0.85);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+body.light .nav-links a {
+  color: #111;
+}
+body.light .theme-btn {
+  color: #111;
+  border-color: rgba(0, 0, 0, 0.2);
+}
+body.light .burger span {
+  background: #111;
+}
+body.light .hero h1 span {
+  color: #0085ff;
+}
+/* === LIGHT MODE === */
+body.light .logo {
+  color: #111; /* ✅ qara mətn */
+}
+body.light .logo span {
+  color: #007acc; /* ✅ mavi vurğu */
+}
+
+body.light .nav-links {
+  background: transparent; /* ✅ tam şəffaf */
+  backdrop-filter: none; /* ✅ arxa fonu bulanmasın */
+  border: none; /* ✅ qutu effekti getdi */
+  box-shadow: none; /* ✅ kölgə effekti də silindi */
+}
+
+/* === HAQQIMDA === */
+.about {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 20px;
+  background: linear-gradient(135deg, #0c0f14, #12161d);
+}
+
+.about-content {
+  max-width: 1000px;
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.about-img {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #00eaff;
+  box-shadow: 0 0 25px rgba(0, 234, 255, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.about-img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 40px rgba(0, 234, 255, 0.45);
+}
+
+.about-text {
+  flex: 1;
+  color: #a9b3c1;
+}
+.about-text h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #00eaff;
+}
+.about-text p {
+  margin-bottom: 18px;
+  line-height: 1.7;
+  font-size: 16px;
+}
+.btn-outline {
+  display: inline-block;
+  border: 2px solid #00eaff;
+  color: #00eaff;
+  padding: 10px 22px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+.btn-outline:hover {
+  background: #00eaff;
+  color: #000;
+  box-shadow: 0 0 20px rgba(0, 234, 255, 0.4);
+}
+
+/* Light rejim uyğunlaşdırması */
+body.light .about {
+  background: linear-gradient(135deg, #f8f9fb, #e9eef2);
+}
+body.light .about-text h2 {
+  color: #007acc;
+}
+body.light .about-text p {
+  color: #333;
+}
+body.light .btn-outline {
+  border-color: #007acc;
+  color: #007acc;
+}
+body.light .btn-outline:hover {
+  background: #007acc;
+  color: #fff;
+  box-shadow: 0 0 20px rgba(0, 122, 204, 0.3);
+}
+
+/* === ACTIONS === */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* === CV düyməsi === */
+/* === CV DROPDOWN (modern variant) === */
 .cv-menu {
   position: relative;
 }
+
 .cv-btn {
-  background: #00ffd5;
+  background: linear-gradient(90deg, #00eaff, #0085ff);
   color: #000;
-  padding: 8px 14px;
-  border-radius: 8px;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 999px;
   font-weight: 600;
+  font-size: 14px;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+  transition: all 0.3s ease;
 }
+
 .cv-btn:hover {
-  background: #00e0c2;
-  transform: translateY(-2px);
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(0, 234, 255, 0.4);
 }
+
+/* --- Açılan menyu --- */
 .cv-dropdown {
   position: absolute;
-  top: 42px;
+  top: 45px;
   right: 0;
   display: none;
   flex-direction: column;
-  background: #1a1a1a;
-  border: 1px solid #333;
-  border-radius: 8px;
-  min-width: 160px;
-  overflow: hidden;
+  align-items: flex-start;
+  background: rgba(15, 18, 24, 0.97);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 6px 0;
+  min-width: 150px;
+  z-index: 9999;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  animation: fadeIn 0.25s ease forwards;
 }
+
 .cv-dropdown a {
-  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #f1f1f1;
   text-decoration: none;
-  padding: 10px 12px;
-  transition: background 0.2s;
+  padding: 10px 16px;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.25s, padding-left 0.25s;
 }
+
 .cv-dropdown a:hover {
-  background: #2b2b2b;
+  background: rgba(0, 234, 255, 0.15);
+  padding-left: 20px;
 }
+
+/* Açıldıqda görünür */
 .cv-menu.open .cv-dropdown {
   display: flex;
 }
 
-/* Hero */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background: radial-gradient(circle at top left, #00ffd5 0%, #0f0f0f 70%);
-  padding: 0 20px;
-}
-.avatar {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  margin-bottom: 20px;
-  border: 3px solid #00ffd5;
-  object-fit: cover;
-}
-.hero h1 {
-  font-size: 38px;
-  margin-bottom: 10px;
-}
-.highlight {
-  color: #00ffd5;
-}
-.role {
-  color: #ccc;
-  margin-bottom: 24px;
-}
-.btn {
-  display: inline-block;
-  background: linear-gradient(90deg, #00ffd5, #00b3ff);
-  color: #000;
-  padding: 12px 26px;
-  border-radius: 999px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: transform 0.2s;
-}
-.btn:hover {
-  transform: scale(1.05);
+/* Light rejim */
+body.light .cv-dropdown {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* Sections */
-.section {
-  background: rgba(40, 40, 40, 0.4);
-  backdrop-filter: blur(6px);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 100px 20px;
-}
-.section h2 {
-  text-align: center;
-  color: #00ffd5;
-  font-size: 28px;
-  margin-bottom: 20px;
-}
-.section p.about-text {
-  text-align: center;
-  color: #ddd;
-}
-body.light .section p.about-text {
-  color: #333;
+body.light .cv-dropdown a {
+  color: #111;
 }
 
-/* Projects */
-.project {
-  display: flex;
-  flex-wrap: wrap;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  margin-top: 20px;
-  overflow: hidden;
-  backdrop-filter: blur(10px);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.project:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
-}
-.project img {
-  width: 100%;
-  max-width: 320px;
-  object-fit: cover;
-}
-.project-info {
-  flex: 1;
-  padding: 20px;
-}
-.project-info h3 {
-  color: #00ffd5;
-}
-.project-info p {
-  margin: 10px 0;
-  color: #ccc;
-}
-.project-info a {
-  background: #00ffd5;
-  color: #000;
-  padding: 8px 16px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-}
-.project-info a:hover {
-  background: #0ff;
+body.light .cv-dropdown a:hover {
+  background: rgba(0, 122, 204, 0.12);
 }
 
-/* Contact */
-.contact {
-  text-align: center;
-  padding: 100px 20px;
-  background: rgba(40, 40, 40, 0.3); /* az şəffaf fon */
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); /* bir az dərinlik */
-  max-width: 800px;
-  margin: 80px auto;
-  position: relative;
-  z-index: 1;
-}
-
-.contact-actions {
-  margin: 24px 0;
-}
-
-.contact-btn {
-  background: linear-gradient(90deg, #00ffd5, #5bb3ff);
-  color: #000;
-  border: none;
-  padding: 12px 32px;
-  border-radius: 999px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  font-size: 15px;
-  text-decoration: none;
-}
-
-.contact-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 255, 213, 0.3);
-}
-
-/* Gizli bölmə */
-.contact-info {
-  display: none;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 16px;
-  animation: fadeIn 0.4s ease;
-}
-
-.contact-info.show {
-  display: flex;
-}
-
-.contact-link {
-  color: #059278;
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.2s;
-}
-
-.contact-link:hover {
-  color: #5bb3ff;
-}
-
+/* Animasiya */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(-8px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
-.socials {
-  margin-top: 16px;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-.socials a {
-  color: #00ffd5;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-.socials a:hover {
-  color: #fff;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 20px;
-  background: #000;
-  color: #666;
-  font-size: 14px;
-}
-
-body.light .navbar {
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-}
-
-body.light .logo {
-  color: #111;
-}
-body.light .logo span {
-  color: #00b3ff;
-}
-
-body.light .nav-links a {
-  color: #111;
-}
-body.light .nav-links a::after {
-  background: #00b3ff;
-}
-body.light .nav-links a:hover {
-  color: #00b3ff;
-}
-
-/* hero mətnləri açıq rejimdə də oxunaqlı olsun */
-body.light .hero {
-  background: linear-gradient(135deg, #f7fffe, #e9eff1);
-}
-body.light .hero h1 {
-  color: #111;
-}
-body.light .highlight {
-  color: #00b3ff;
-}
-body.light .role {
-  color: #555;
-}
-
-/* bölmə başlıqları və mətin kontrastı */
-
-body.light .section,
-body.light .contact {
-  background: rgba(255, 255, 255, 0.85) !important;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-}
-body.light .section h2 {
-  color: #00b3ff;
-}
-body.light .section p.about-text {
-  color: #333;
-}
-
-/* layihə kartları */
-body.light .project {
-  background: rgba(0, 0, 0, 0.04);
-}
-body.light .project-info h3 {
-  color: #005a94;
-}
-body.light .project-info p {
-  color: #444;
-}
-
-/* 🍔 Burger icon */
-.burger {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 24px;
-  height: 18px;
-  cursor: pointer;
-  z-index: 2000;
-}
-.burger span {
-  display: block;
-  height: 3px;
-  width: 100%;
-  background: #00ffd5;
+.flag {
+  width: 18px;
+  height: 12px;
+  object-fit: cover;
   border-radius: 2px;
-  transition: all 0.3s ease;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
 }
 
-/* Burger açılarkən animasiya */
-
-.burger.active span:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
-}
-.burger.active span:nth-child(2) {
-  opacity: 0;
-}
-.burger.active span:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
-}
-
-/* 🌞 Light rejimdə CV menyusunu düzəlt */
-body.light .cv-dropdown {
-  background: #ffffff; /* ağ fon */
-  border: 1px solid #ccc; /* açıq sərhəd */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-}
-
-body.light .cv-dropdown a {
-  color: #000; /* tünd yazı */
+/* === Dil düyməsi === */
+.lang-btn {
+  border: 1px solid rgba(255, 255, 255, 0.2);
   background: transparent;
-}
-
-body.light .cv-dropdown a:hover {
-  background: #00b3ff; /* hover zamanı mavi fon */
-  color: #fff;
-}
-/* 🌞 Light rejimdə əlaqə bölməsi */
-body.light .contact h2 {
-  color: #007acc; /* mavi başlıq */
-}
-
-body.light .contact p {
-  color: #111; /* qara mətn */
-}
-
-body.light .contact .btn {
-  background: linear-gradient(90deg, #00b3ff, #00ffd5);
-  color: #000; /* qara yazı */
-}
-
-body.light .socials a {
-  color: #007acc; /* daha tünd linklər */
-}
-body.light .socials a:hover {
-  color: #00b3ff;
-}
-
-body.light .nav-links {
-  background: rgba(255, 255, 255, 0.95);
-}
-body.light .nav-links a {
-  color: #111;
-}
-body.light .burger span {
-  background: #00b3ff;
-}
-
-/* 🌞 Apple-style Light Mode üçün ümumi fon və yumşaq effektlər */
-body.light {
-  background: linear-gradient(180deg, #fefefe 0%, #f6f7f8 100%);
-  color: #111;
-  transition: background 0.5s ease, color 0.5s ease;
-}
-
-/* Navbar üçün incə şəffaflıq və kölgə */
-body.light .navbar {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-}
-
-/* Hero bölməsi – gradient və dərinlik effekti */
-body.light .hero {
-  background: linear-gradient(180deg, #ffffff 0%, #f1f3f4 100%);
-  box-shadow: inset 0 -8px 30px rgba(0, 0, 0, 0.05);
-}
-
-/* Bölmələr arasında incə ayırıcı və kölgə */
-body.light .section {
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 20px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
-  padding: 60px 24px;
-  margin-bottom: 60px;
-  transition: all 0.3s ease;
-}
-body.light .section:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-}
-
-/* Layihə kartları */
-body.light .project {
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-  transition: all 0.3s ease;
-}
-body.light .project:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-/* Kontakt hissəsi üçün gradient düymə */
-body.light .contact .btn {
-  background: linear-gradient(90deg, #00b3ff, #00ffd5);
-  color: #000;
+  color: #f1f1f1;
+  padding: 8px 14px;
+  border-radius: 999px;
   font-weight: 600;
-  box-shadow: 0 4px 12px rgba(0, 179, 255, 0.3);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
-body.light .contact .btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 18px rgba(0, 179, 255, 0.45);
+.lang-btn:hover {
+  border-color: #00eaff;
+  color: #00eaff;
 }
 
-/* Footer və yazılar */
-body.light footer {
-  background: linear-gradient(180deg, #f8f8f8 0%, #f0f0f0 100%);
-  color: #555;
-  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
+/* Light rejim üçün */
+body.light .cv-btn {
+  background: linear-gradient(90deg, #007acc, #00bfff);
+  color: #fff;
 }
-/* 🌫️  GLASSMORPHISM EFFEKTİ (Apple tərzi dərinlik) */
-body.light {
-  background: radial-gradient(circle at top left, #ffffff 0%, #e8eef2 100%);
+body.light .lang-btn {
   color: #111;
-  backdrop-filter: blur(6px);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+body.light .lang-btn:hover {
+  border-color: #007acc;
+  color: #007acc;
 }
 
-/* 🌫️ Navbar — şəffaf və parlaq görünüş */
-body.light .navbar {
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(14px);
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-/* ✨ Hero hissəsi — parıltı və dərinlik */
-body.light .hero {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.6),
-    rgba(245, 247, 248, 0.8)
-  );
-  box-shadow: inset 0 -8px 20px rgba(0, 0, 0, 0.05);
-  border-radius: 0 0 40px 40px;
-}
-
-/* 🧊 Bölmələr — yarı şəffaf “glass card” hissi */
-body.light .section {
-  background: rgba(255, 255, 255, 0.55);
-  border-radius: 20px;
-  backdrop-filter: blur(20px);
-  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  transition: all 0.4s ease;
-}
-body.light .section:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
-}
-
-/* 💎 Layihə kartları */
-body.light .project {
-  background: rgba(255, 255, 255, 0.45);
-  border-radius: 18px;
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-body.light .project:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
-}
-
-/* 📩 Əlaqə bölməsi */
-body.light .contact {
-  background: rgba(255, 255, 255, 0.45);
-  border-radius: 16px;
-  backdrop-filter: blur(12px);
-  padding: 40px 20px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-}
-
-/* 🌈 Footer — yumşaq kölgə və gradient */
-body.light footer {
-  background: linear-gradient(180deg, #f9f9f9 0%, #f1f1f1 100%);
-  color: #555;
-  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
-  border-top: 1px solid rgba(255, 255, 255, 0.4);
-}
-
-/* 🍔 Burger menyu üçün fade + slide animasiyası */
-
-/* Menyu açıldıqda görünən animasiya */
-@keyframes slideFadeIn {
-  0% {
-    opacity: 0;
-    transform: translateX(40px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* Menyu bağlanarkən yoxa çıxma animasiyası */
-@keyframes slideFadeOut {
-  0% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(40px);
-  }
-}
-
-/* 📄 CV dropdown üçün animasiya (fade + slide) */
-
-/* açılarkən görünmə animasiyası */
-@keyframes cvFadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* bağlanarkən yavaş yox olma */
-@keyframes cvFadeOut {
-  0% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-}
-
-/* əsas görünüş */
-.cv-dropdown {
-  position: absolute;
-  top: 42px;
-  right: 0;
-  display: none;
-  flex-direction: column;
-  background: rgba(25, 25, 25, 0.95);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-  animation: cvFadeIn 0.3s ease forwards;
-  transform-origin: top right;
-  z-index: 200;
-}
-
-/* açıq vəziyyət */
-.cv-menu.open .cv-dropdown {
-  display: flex;
-  animation: cvFadeIn 0.3s ease forwards;
-}
-
-/* bağlananda yumşaq fade-out */
-.cv-dropdown.closing {
-  animation: cvFadeOut 0.3s ease forwards;
-}
-
-/* linklər */
-.cv-dropdown a {
-  padding: 10px 14px;
-  color: #fff;
-  text-decoration: none;
-  background: transparent;
-  transition: background 0.3s, color 0.3s;
-}
-.cv-dropdown a:hover {
-  background: #00ffd5;
-  color: #000;
-}
-
-/* Light mode uyğunlaşması */
-body.light .cv-dropdown {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-body.light .cv-dropdown a {
-  color: #000;
-}
-body.light .cv-dropdown a:hover {
-  background: #00b3ff;
-  color: #fff;
-}
-
-/* 🌫️ Overlay (menyu açıldıqda fonu qaraldır) */
+/* 🌫️ Overlay (fonu qaraldır və blur effekti verir) */
 .overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.3); /* tünd şəffaf fon */
-  backdrop-filter: blur(2px);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25); /* bir az daha tünd */
+  backdrop-filter: blur(10px);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.4s ease, visibility 0.4s ease;
-  z-index: 900; /* menyunun arxasında */
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 4000;
 }
 
-/* Açıq vəziyyətdə görünür */
 .overlay.active {
   opacity: 1;
   visibility: visible;
 }
 
-/* Light mode üçün azca fərqli */
 body.light .overlay {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.3);
 }
 
-.email-box {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  padding: 12px 20px;
-  margin-top: 10px;
-  animation: fadeIn 0.3s ease;
+/* 🌫️ Menyu açıq olanda bütün kontent blur və qaralır */
+body.menu-open .hero,
+body.menu-open .about {
+  filter: blur(5px) brightness(0.9);
+  transition: filter 0.3s ease;
+  pointer-events: none;
+}
+/* navbar və menyunun özü blur olmasın */
+body.menu-open .navbar,
+body.menu-open .nav-links {
+  filter: none !important;
 }
 
-.email-box.show {
-  display: flex;
+/* === LAYİHƏLƏR === */
+/* === LAYİHƏLƏR === */
+.projects {
+  padding: 100px 20px;
+  text-align: center;
+  background: linear-gradient(135deg, #0c0f14, #12161d);
 }
 
-#emailText {
-  font-weight: 600;
-  color: #00ffd5;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 8px 16px;
+.projects h2 {
+  font-size: 36px;
+  color: #00eaff;
+  margin-bottom: 50px;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 40px;
+  justify-content: center;
+}
+
+.project-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 20px;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(0, 234, 255, 0.2);
+}
+
+.project-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
   border-radius: 10px;
-  word-break: break-all;
+  margin-bottom: 15px;
+  transition: transform 0.4s ease;
 }
 
-.email-actions {
+.project-card img:hover {
+  transform: scale(1.05);
+}
+
+.project-card h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+  color: #00eaff;
+}
+
+.project-card p {
+  font-size: 14px;
+  color: #a9b3c1;
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.btn-group {
   display: flex;
   gap: 10px;
-  margin-top: 8px;
 }
 
-.mini-btn {
-  background: linear-gradient(90deg, #00ffd5, #5bb3ff);
-  border: none;
+.btn-outline {
+  display: inline-block;
+  border: 1.5px solid #00eaff;
+  color: #00eaff;
+  padding: 8px 16px;
   border-radius: 999px;
-  padding: 6px 14px;
+  text-decoration: none;
   font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.2s ease;
+  transition: all 0.3s ease;
+  text-align: center;
 }
 
-.mini-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 3px 10px rgba(0, 255, 213, 0.3);
-}
-
-/* İkinci email düyməsi dizaynı */
-.contact-btn.secondary {
-  background: linear-gradient(90deg, #5bb3ff, #a3ffd3);
+.btn-outline:hover {
+  background: #00eaff;
   color: #000;
+  box-shadow: 0 0 15px rgba(0, 234, 255, 0.3);
 }
 
-.contact-buttons {
+/* === Light rejim === */
+body.light .projects {
+  background: linear-gradient(135deg, #f9fafb, #eef2f6);
+}
+
+body.light .projects h2 {
+  color: #007acc;
+}
+
+body.light .project-card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+body.light .project-card h3 {
+  color: #007acc;
+}
+
+body.light .project-card p {
+  color: #333;
+}
+
+body.light .btn-outline {
+  border-color: #007acc;
+  color: #007acc;
+}
+
+body.light .btn-outline:hover {
+  background: #007acc;
+  color: #fff;
+  box-shadow: 0 0 12px rgba(0, 122, 204, 0.3);
+}
+
+/* === ƏLAQƏ === */
+.contact {
+  min-height: 80vh;
   display: flex;
-  flex-direction: column; /* alt-alta */
+  justify-content: center;
   align-items: center;
+  padding: 100px 20px;
+  background: linear-gradient(135deg, #0c0f14, #12161d);
+  text-align: center;
+}
+
+.contact-container {
+  max-width: 600px;
+  width: 100%;
+}
+
+.contact h2 {
+  color: #00eaff;
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+.contact p {
+  color: #a9b3c1;
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
   gap: 16px;
-  margin: 32px 0;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #f1f1f1;
+  font-size: 15px;
+  resize: none;
+  outline: none;
+  transition: border 0.3s ease, background 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #00eaff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-send {
+  background: linear-gradient(90deg, #00eaff, #0085ff);
+  border: none;
+  color: #000;
+  padding: 12px 20px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-send:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 234, 255, 0.4);
+}
+
+/* Light rejim */
+body.light .contact {
+  background: linear-gradient(135deg, #f8f9fb, #e9eef2);
+}
+
+body.light .contact h2 {
+  color: #007acc;
+}
+
+body.light .contact p {
+  color: #444;
+}
+
+body.light .contact-form input,
+body.light .contact-form textarea {
+  background: rgba(0, 0, 0, 0.04);
+  color: #111;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light .btn-send {
+  background: linear-gradient(90deg, #007acc, #00bfff);
+  color: #fff;
+}
+/* === ƏLAQƏ FORMU STATUS MESAJI === */
+.form-status {
+  display: flex;
+  align-items: center; /* ✅ ikon və mətn eyni xəttdə */
+  justify-content: center; /* ortada hizalansın */
+  gap: 10px; /* ikonla mətn arasında məsafə */
+  font-size: 18px;
+  font-weight: 600;
+  color: #00eaff;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.form-status.success {
+  color: #00eaff;
+  animation: fadeOut 3s ease forwards;
+}
+
+.form-status.error {
+  color: #ff4d4d;
+}
+.form-status:empty {
+  display: none;
+}
+.form-status.loading {
+  color: #00bfff;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+/* ✅ Check icon animasiyası */
+.checkmark {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border: 2px solid #00eaff;
+  border-radius: 50%;
+  display: inline-block;
+  animation: glowPulse 1.5s ease-in-out infinite alternate;
+  transform: translate(3px, 2px);
+}
+
+.checkmark::after {
+  content: "";
+  position: absolute;
+  top: 6px; /* bir az aşağı salır */
+  left: 9px; /* bir az sağa çəkir */
+  width: 6px;
+  height: 10px;
+  border-right: 2px solid #00eaff;
+  border-bottom: 2px solid #00eaff;
+  transform: rotate(45deg);
+  opacity: 0;
+  animation: draw 0.4s ease 0.3s forwards;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0);
+  }
+  80% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes draw {
+  to {
+    opacity: 1;
+  }
+  0% {
+    transform: rotate(45deg) scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(45deg) scale(1);
+    opacity: 1;
+  }
+}
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 0 5px #00eaff, 0 0 10px rgba(0, 234, 255, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 15px #00eaff, 0 0 25px rgba(0, 234, 255, 0.8);
+  }
+}
+.success-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #00eaff;
+  font-weight: 600;
+  font-size: 18px;
+  margin-top: 15px;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.success-text {
+  letter-spacing: 0.5px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === FOOTER === */
+.footer {
+  background: linear-gradient(135deg, #0c0f14, #12161d);
+  color: #a9b3c1;
+  text-align: center;
+  padding: 30px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-content {
+  max-width: 900px;
+  margin: auto;
+}
+
+.footer p {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.footer .social-links {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.footer .social-links a {
+  color: #00eaff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-weight: 500;
+}
+
+.footer .social-links a:hover {
+  color: #0085ff;
+}
+
+/* Light rejim */
+body.light .footer {
+  background: linear-gradient(135deg, #f8f9fb, #e9eef2);
+  color: #444;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+body.light .footer .social-links a {
+  color: #007acc;
+}
+body.light .footer .social-links a:hover {
+  color: #005fa3;
+}
+/* ✅ Əlaqə hissəsi */
+.contact-info {
+  margin-top: 25px;
+  text-align: center;
+  font-size: 16px;
+  color: #a9b3c1;
+}
+
+.contact-info p {
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+/* Ümumi link dizaynı */
+.contact-link {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 600;
+  margin: 6px 10px;
+  padding: 10px 18px;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+/* 📞 Zəng et düyməsi */
+.contact-link:first-of-type {
+  background: linear-gradient(90deg, #00eaff, #0085ff);
+  color: #000;
+  box-shadow: 0 0 10px rgba(0, 234, 255, 0.3);
+}
+.contact-link:first-of-type:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 18px rgba(0, 234, 255, 0.6);
+}
+
+/* 💬 WhatsApp düyməsi */
+.contact-link:last-of-type {
+  background: linear-gradient(90deg, #25d366, #1ebe57);
+  color: #fff;
+  box-shadow: 0 0 10px rgba(37, 211, 102, 0.3);
+}
+.contact-link:last-of-type:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 18px rgba(37, 211, 102, 0.6);
+}
+
+/* 🌞 Light rejim üçün */
+body.light .contact-link:first-of-type {
+  background: linear-gradient(90deg, #007acc, #00bfff);
+  color: #fff;
+}
+body.light .contact-link:last-of-type {
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+  color: #fff;
 }

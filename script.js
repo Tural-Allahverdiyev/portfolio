@@ -1,111 +1,207 @@
-// AOS (scroll animasiyası)
-AOS.init({ duration: 800, once: true });
-
-// İl
-document.getElementById("year").textContent = new Date().getFullYear();
-
-// Tema (Dark/Light)
+// Tema dəyişimi
 const themeBtn = document.getElementById("themeBtn");
-const savedTheme = localStorage.getItem("theme");
-if (savedTheme === "light") {
-  document.body.classList.add("light");
-  themeBtn.textContent = "☀️";
-}
 themeBtn.addEventListener("click", () => {
   document.body.classList.toggle("light");
-  const isLight = document.body.classList.contains("light");
-  themeBtn.textContent = isLight ? "☀️" : "🌙";
-  localStorage.setItem("theme", isLight ? "light" : "dark");
+  themeBtn.textContent = document.body.classList.contains("light")
+    ? "☀️"
+    : "🌙";
 });
 
-// Dil resursları
-const i18n = {
+// Burger menyu
+const burger = document.getElementById("burger");
+const navLinks = document.getElementById("navLinks");
+const overlay = document.getElementById("overlay");
+
+burger.addEventListener("click", () => {
+  burger.classList.toggle("active");
+  navLinks.classList.toggle("open");
+  overlay.classList.toggle("active");
+  document.body.classList.toggle("menu-open");
+});
+
+overlay.addEventListener("click", () => {
+  burger.classList.remove("active");
+  navLinks.classList.remove("open");
+  overlay.classList.remove("active");
+  document.body.classList.remove("menu-open");
+});
+// 🔗 Naviqasiya linklərinə klik edəndə menyunu bağla və bölməyə get
+const navLinksItems = document.querySelectorAll(".nav-links a");
+
+navLinksItems.forEach((link) => {
+  link.addEventListener("click", () => {
+    // menyunu bağla
+    burger.classList.remove("active");
+    navLinks.classList.remove("open");
+    overlay.classList.remove("active");
+    document.body.classList.remove("menu-open");
+
+    // həmin bölməyə smooth scroll et
+    const targetId = link.getAttribute("href");
+    const targetSection = document.querySelector(targetId);
+
+    if (targetSection) {
+      window.scrollTo({
+        top: targetSection.offsetTop - 80, // navbar hündürlüyü qədər boşluq
+        behavior: "smooth",
+      });
+    }
+  });
+});
+
+// Dil dəyişimi (sadə toggle üçün)
+// 🌐 Sadə dil dəyişimi (AZ ⇄ EN)
+// 🌐 DİL DƏYİŞİMİ (AZ <-> EN)
+const translations = {
   az: {
-    brand: "Tural <span>Allahverdiyev</span>",
-    nav_about: "Haqqımda",
-    nav_projects: "Layihələr",
-    nav_contact: "Əlaqə",
-    nav_cv: "CV",
-    cv_az: "CV (AZ)",
-    cv_en: "CV (EN)",
-    hero_title: 'Salam, mən <span class="highlight">Tural Allahverdiyev</span>',
-    hero_role: "Fullstack Developer • UI Enthusiast",
-    hero_cta: "Layihələrimə bax",
-    about_title: "Haqqımda",
-    about_text:
-      "Mən Tural Allahverdiyev, gənc olmasam da yeni başlayan bir Fullstack Developerəm. Müasir veb texnologiyalarla istifadəçi yönümlü, dinamik və funksional interfeyslər hazırlayıram. Məqsədim dizaynla funksionallığı birləşdirərək insanlara rahat, cəlbedici və işlək həllər təqdim etməkdir. Bu yolda özümə inanıram və düşünürəm ki, istənilən dizaynı qısa müddətdə funksional şəkildə həyata keçirə bilərəm. Keçmişdə mühasibatlıq və anbar idarəçiliyi kimi sahələrdə çalışmışam və bu təcrübələr mənə sistemli düşünmə, məsuliyyət və detallara diqqət kimi bacarıqlar qazandırıb. Daha ətraflı məlumat üçün CV faylımla tanış ola bilərsiniz.",
-    projects_title: "Layihələr",
-    proj_shopco_desc: "HTML, CSS və JS ilə hazırladığım responsive GYM.",
-    proj_calc_desc: "JavaScript ilə yazılmış müasir kalkulyator interfeysi.",
-    contact_title: "Əlaqə",
-    contact_text: "Gəlin birlikdə əla nəsə yaradaq!",
-    contact_btn: "Email göndər",
-    live_demo: "Canlı bax",
-    contact_btn_call: "Yaz və ya zəng et",
-    contact_btn_email: "Email",
-    copy_email: "Kopyala",
-    send_email: "Buradan göndər",
-    call_btn: "📞 Zəng et",
-    whatsapp_btn: "💬 WhatsApp-da yaz",
+    about: "Haqqımda",
+    projects: "Layihələr",
+    contact: "Əlaqə",
+    heroText1: "Salam, mən",
+    heroText2: "Fullstack Developer",
+    heroBtn: "Layihələrimə bax",
+    aboutTitle: "Haqqımda",
+    aboutP1:
+      "Mən Tural Allahverdiyev, müasir veb texnologiyalarla işləməyi sevən bir Fullstack Developerəm. Məqsədim həm dizayn, həm də funksionallığı birləşdirərək istifadəçilərə estetik və praktik həllər təqdim etməkdir.",
+    aboutP2:
+      "HTML, CSS və JavaScript texnologiyaları ilə real layihələr hazırlayıram və hər yeni layihədə özümü bir addım daha təkmilləşdirməyə çalışıram.",
+    aboutBtn: "Layihələrimə bax",
+    contactTitle: "Əlaqə",
+    contactText:
+      "Mənimlə əlaqə saxlamaq istəyirsinizsə, aşağıdakı formu doldura bilərsiniz 👇",
+    formName: "Adınız",
+    formEmail: "Email ünvanınız",
+    formMessage: "Mesajınız...",
+    formBtn: "Göndər",
+    footerText: "© 2025 Tural Allahverdiyev. Bütün hüquqlar qorunur.",
+
+    // 💼 Layihələr (AZ)
+    projectTitle1: "Portfolio Saytı",
+    projectDesc1:
+      "HTML, CSS və JavaScript ilə hazırlanmış şəxsi portfolio layihəm.",
+    projectTitle2: "GYM Saytı",
+    projectDesc2:
+      "İdman mərkəzi üçün responsive dizaynlı HTML, CSS və JS sayt.",
+    projectTitle3: "Online Market",
+    projectDesc3:
+      "Sadə məhsul kataloqu və səbət funksiyası olan HTML, CSS və JS layihəsi.",
+    projectTitle4: "Kalkulyator",
+    projectDesc4:
+      "Təmiz JavaScript ilə hazırlanmış interaktiv kalkulyator layihəsi.",
+    projectBtnLive: "Canlı Bax",
+    projectBtnGit: "GitHub",
+    directContact: "Və ya birbaşa əlaqə saxlayın:",
+    callText: "📞 Zəng et",
+    whatsappText: "💬 WhatsApp ilə yaz",
   },
   en: {
-    brand: "Tural <span>Allahverdiyev</span>",
-    nav_about: "About",
-    nav_projects: "Projects",
-    nav_contact: "Contact",
-    nav_cv: "CV",
-    cv_az: "CV (AZ)",
-    cv_en: "CV (EN)",
-    hero_title: 'Hi, I\'m <span class="highlight">Tural Allahverdiyev</span>',
-    hero_role: "Fullstack Developer • UI Enthusiast",
-    hero_cta: "View My Work",
-    about_title: "About Me",
-    about_text:
-      "I’m Tural Allahverdiyev, a beginner yet passionate Fullstack Developer. I build user-oriented, dynamic and functional interfaces with modern web technologies. My goal is to combine design and functionality to deliver smooth, attractive and practical experiences. I believe in myself and I can turn almost any design into a working solution in a short time. In the past I worked in accounting and warehouse management, which strengthened my structured mindset, responsibility and attention to detail. For more information, please check my CV.",
-    projects_title: "Projects",
-    proj_shopco_desc:
-      "A responsive online shop built with HTML, CSS and JavaScript.",
-    proj_calc_desc: "A modern calculator interface built with JavaScript.",
-    contact_title: "Contact",
-    contact_text: "Let’s build something great together!",
-    contact_btn: "Send Email",
-    live_demo: "Live Demo",
-    contact_btn_call: "Write or call",
-    contact_btn_email: "Email",
-    copy_email: "Copy",
-    send_email: "Send from here",
-    call_btn: "📞 Call me",
-    whatsapp_btn: "💬 Message on WhatsApp",
+    about: "About",
+    projects: "Projects",
+    contact: "Contact",
+    heroText1: "Hello, I'm",
+    heroText2: "Fullstack Developer",
+    heroBtn: "View My Projects",
+    aboutTitle: "About Me",
+    aboutP1:
+      "I am Tural Allahverdiyev, a Fullstack Developer passionate about modern web technologies. My goal is to combine design and functionality to deliver aesthetic and practical solutions.",
+    aboutP2:
+      "I build real-world projects with HTML, CSS, and JavaScript, always striving to improve my skills with each project.",
+    aboutBtn: "View My Projects",
+    contactTitle: "Contact",
+    contactText:
+      "If you'd like to get in touch with me, please fill out the form below 👇",
+    formName: "Your Name",
+    formEmail: "Your Email",
+    formMessage: "Your Message...",
+    formBtn: "Send",
+    footerText: "© 2025 Tural Allahverdiyev. All rights reserved.",
+
+    // 💼 Projects (EN)
+    projectTitle1: "Portfolio Website",
+    projectDesc1: "My personal portfolio built with HTML, CSS, and JavaScript.",
+    projectTitle2: "Gym Website",
+    projectDesc2:
+      "A responsive fitness center website made using HTML, CSS, and JS.",
+    projectTitle3: "Online Market",
+    projectDesc3:
+      "A simple product catalog with a shopping cart built with HTML, CSS, and JS.",
+    projectTitle4: "Calculator",
+    projectDesc4: "An interactive calculator built with pure JavaScript.",
+    projectBtnLive: "Live Demo",
+    projectBtnGit: "GitHub",
+    directContact: "Or contact me directly:",
+    callText: "📞 Call",
+    whatsappText: "💬 Message on WhatsApp",
   },
 };
 
-// Dil tətbiqi
-const langBtn = document.getElementById("langBtn");
-const savedLang = localStorage.getItem("lang") || "az";
-applyLang(savedLang);
-langBtn.textContent = savedLang.toUpperCase();
+const langBtnSwitch = document.getElementById("langBtn");
+let currentLang = "az";
 
-function applyLang(lang) {
-  const dict = i18n[lang];
-  document.querySelectorAll("[data-i18n]").forEach((el) => {
-    const key = el.getAttribute("data-i18n");
-    if (!dict[key]) return;
-    // HTML içində span və s. üçün innerHTML istifadə edirik
-    el.innerHTML = dict[key];
-  });
-  localStorage.setItem("lang", lang);
-  document.documentElement.lang = lang;
-}
-
-// Dil düyməsi
-langBtn.addEventListener("click", () => {
-  const current = localStorage.getItem("lang") || "az";
-  const next = current === "az" ? "en" : "az";
-  applyLang(next);
-  langBtn.textContent = next.toUpperCase();
+langBtnSwitch.addEventListener("click", () => {
+  currentLang = currentLang === "az" ? "en" : "az";
+  langBtnSwitch.textContent = currentLang.toUpperCase();
+  applyLanguage(currentLang);
 });
 
-// CV açılan menyu
+function applyLanguage(lang) {
+  const t = translations[lang];
+  document.querySelector(".contact-info p").textContent = t.directContact;
+  document.querySelectorAll(".contact-link")[0].textContent = t.callText;
+  document.querySelectorAll(".contact-link")[1].textContent = t.whatsappText;
+  document.querySelector("#projects h2").textContent = t.projects;
+  document.querySelectorAll(".project-card h3")[0].textContent =
+    t.projectTitle1;
+  document.querySelectorAll(".project-card p")[0].textContent = t.projectDesc1;
+  document.querySelectorAll(".project-card h3")[1].textContent =
+    t.projectTitle2;
+  document.querySelectorAll(".project-card p")[1].textContent = t.projectDesc2;
+  document.querySelectorAll(".project-card h3")[2].textContent =
+    t.projectTitle3;
+  document.querySelectorAll(".project-card p")[2].textContent = t.projectDesc3;
+  document.querySelectorAll(".project-card h3")[3].textContent =
+    t.projectTitle4;
+  document.querySelectorAll(".project-card p")[3].textContent = t.projectDesc4;
+  document
+    .querySelectorAll(".project-card .btn-outline:first-child")
+    .forEach((btn) => (btn.textContent = t.projectBtnLive));
+  document
+    .querySelectorAll(".project-card .btn-outline:last-child")
+    .forEach((btn) => (btn.textContent = t.projectBtnGit));
+
+  // Navbar
+  document.querySelector('a[href="#about"]').textContent = t.about;
+  document.querySelector('a[href="#projects"]').textContent = t.projects;
+  document.querySelector('a[href="#contact"]').textContent = t.contact;
+
+  // Hero
+  document.querySelector(
+    ".hero h1"
+  ).innerHTML = `${t.heroText1} <span>Tural Allahverdiyev</span>`;
+  document.querySelector(".hero p").textContent = t.heroText2;
+  document.querySelector(".hero .cta-btn").textContent = t.heroBtn;
+
+  // About
+  document.querySelector(".about-text h2").textContent = t.aboutTitle;
+  const aboutPs = document.querySelectorAll(".about-text p");
+  aboutPs[0].textContent = t.aboutP1;
+  aboutPs[1].textContent = t.aboutP2;
+  document.querySelector(".about-text .btn-outline").textContent = t.aboutBtn;
+
+  // Contact
+  document.querySelector("#contact h2").textContent = t.contactTitle;
+  document.querySelector("#contact p").textContent = t.contactText;
+  document.querySelector('input[name="name"]').placeholder = t.formName;
+  document.querySelector('input[name="email"]').placeholder = t.formEmail;
+  document.querySelector('textarea[name="message"]').placeholder =
+    t.formMessage;
+  document.querySelector(".btn-send").textContent = t.formBtn;
+
+  // Footer
+  document.querySelector(".footer-content p").textContent = t.footerText;
+}
+
+// 📄 CV dropdown menyusu
 const cvMenu = document.querySelector(".cv-menu");
 const cvBtn = document.getElementById("cvBtn");
 const cvDropdown = document.getElementById("cvDropdown");
@@ -114,97 +210,106 @@ cvBtn.addEventListener("click", (e) => {
   e.stopPropagation();
 
   if (cvMenu.classList.contains("open")) {
-    // bağlanma animasiyası
-    cvDropdown.classList.add("closing");
-    setTimeout(() => {
-      cvMenu.classList.remove("open");
-      cvDropdown.classList.remove("closing");
-    }, 300);
+    cvMenu.classList.remove("open");
   } else {
-    // açılma animasiyası
     cvMenu.classList.add("open");
   }
 });
 
+// Səhifəyə klikləyəndə bağlanır
 document.addEventListener("click", (e) => {
   if (!cvMenu.contains(e.target)) {
-    cvDropdown.classList.add("closing");
-    setTimeout(() => {
-      cvMenu.classList.remove("open");
-      cvDropdown.classList.remove("closing");
-    }, 300);
+    cvMenu.classList.remove("open");
   }
 });
 
-// 🍔 Burger menyu
-const burger = document.getElementById("burger");
-const navLinks = document.getElementById("navLinks");
-const overlay = document.getElementById("overlay");
-
-burger.addEventListener("click", () => {
-  const isOpen = navLinks.classList.contains("open");
-
-  if (isOpen) {
-    navLinks.classList.remove("open");
-    overlay.classList.remove("active");
-  } else {
-    navLinks.classList.add("open");
-    overlay.classList.add("active");
-  }
-
-  burger.classList.toggle("active");
-});
-
-overlay.addEventListener("click", () => {
-  burger.classList.remove("active");
-  navLinks.classList.remove("open");
-  overlay.classList.remove("active");
-});
-// Menyudan klikləyəndə avtomatik bağlansın
+// 🔗 Naviqasiya linkinə klikləndikdə menyunu bağla və scroll et
 document.querySelectorAll(".nav-links a").forEach((link) => {
-  link.addEventListener("click", () => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    // Target sekmənin id-si (məsələn: #about)
+    const targetId = link.getAttribute("href");
+    const targetSection = document.querySelector(targetId);
+
+    // Smooth scroll
+    if (targetSection) {
+      window.scrollTo({
+        top: targetSection.offsetTop - 80, // navbar hündürlüyünə görə düzəliş
+        behavior: "smooth",
+      });
+    }
+
+    // ✅ Menyunu bağla və overlayi gizlət
     burger.classList.remove("active");
     navLinks.classList.remove("open");
     overlay.classList.remove("active");
+    document.body.classList.remove("menu-open");
   });
 });
+// 📍 Aktiv bölməni vurğula (scroll zamanı)
+const sections = document.querySelectorAll("section");
+const navItems = document.querySelectorAll(".nav-links a");
 
-// 📞 Əlaqə hissəsi
+window.addEventListener("scroll", () => {
+  let current = "";
 
-// --- Elementləri seçirik
-const callBtn = document.getElementById("callBtn");
-const whatsappBtn = document.getElementById("whatsappBtn");
-const emailBtn = document.getElementById("emailBtn");
-const emailBox = document.getElementById("emailBox");
-const copyEmail = document.getElementById("copyEmail");
-const emailText = document.getElementById("emailText");
-
-// --- Zəng et
-if (callBtn) {
-  callBtn.addEventListener("click", () => {
-    window.location.href = "tel:+994555479988";
+  sections.forEach((section) => {
+    const sectionTop = section.offsetTop - 100;
+    if (pageYOffset >= sectionTop) {
+      current = section.getAttribute("id");
+    }
   });
-}
 
-// --- WhatsApp-da yaz
-if (whatsappBtn) {
-  whatsappBtn.addEventListener("click", () => {
-    window.open("https://wa.me/994555479988", "_blank");
+  navItems.forEach((link) => {
+    link.classList.remove("active");
+    if (link.getAttribute("href") === `#${current}`) {
+      link.classList.add("active");
+    }
   });
-}
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("contactForm");
+  const status = document.getElementById("formStatus");
 
-// --- Email bölməsini aç / bağla
-if (emailBtn && emailBox) {
-  emailBtn.addEventListener("click", () => {
-    emailBox.classList.toggle("show");
-  });
-}
+  if (!form) {
+    console.warn("❌ Form tapılmadı!");
+    return;
+  }
 
-// --- Emaili kopyala
-if (copyEmail && emailText) {
-  copyEmail.addEventListener("click", () => {
-    navigator.clipboard.writeText(emailText.textContent);
-    copyEmail.textContent = "📋 Kopyalandı!";
-    setTimeout(() => (copyEmail.textContent = "📋 Kopyala"), 2000);
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    status.textContent = "Göndərilir...";
+    status.className = "form-status loading";
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: formData,
+        headers: { Accept: "application/json" },
+      });
+
+      if (response.ok) {
+        form.reset();
+
+        // ✅ Uğurlu animasiya
+        status.innerHTML = `<div class="checkmark"></div> <span>Mesaj göndərildi!</span>`;
+        status.className = "form-status success";
+
+        // 4 saniyəyə status silinsin
+        setTimeout(() => {
+          status.innerHTML = "";
+        }, 4000);
+      } else {
+        status.textContent = "❌ Xəta baş verdi. Yenidən yoxlayın.";
+        status.className = "form-status error";
+      }
+    } catch (err) {
+      status.textContent = "⚠️ Şəbəkə problemi. Bir az sonra yenidən yoxlayın.";
+      status.className = "form-status error";
+    }
   });
-}
+});

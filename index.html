@@ -2,189 +2,247 @@
 <html lang="az">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tural Allahverdiyev — Portfolio</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="./responsive.css" />
+    <link rel="stylesheet" href="responsive.css" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   </head>
+  <div class="overlay" id="overlay"></div>
   <body>
-    <!-- Üst sağ: tema və dil -->
-
-    <!-- Naviqasiya -->
+    <!-- NAVBAR -->
     <nav class="navbar">
-      <div class="logo" data-i18n="brand">Tural <span>Allahverdiyev</span></div>
-      <div class="right-side">
-        <ul class="nav-links" id="navLinks">
-          <li><a href="#about" data-i18n="nav_about">Haqqımda</a></li>
-          <li><a href="#projects" data-i18n="nav_projects">Layihələr</a></li>
-          <li><a href="#contact" data-i18n="nav_contact">Əlaqə</a></li>
-          <li class="cv-menu">
-            <button class="cv-btn" id="cvBtn" data-i18n="nav_cv">CV</button>
-            <div class="cv-dropdown" id="cvDropdown">
-              <a
-                href="files/Tural-Allahverdiyev-CV-AZ.pdf"
-                download
-                data-i18n="cv_az"
-                >CV (AZ)</a
-              >
-              <a
-                href="files/Tural-Allahverdiyev-CV-EN.pdf"
-                download
-                data-i18n="cv_en"
-                >CV (EN)</a
-              >
-            </div>
-          </li>
-        </ul>
-        <div class="actions">
-          <button class="theme-toggle" id="themeBtn" aria-label="Theme">
-            🌙
-          </button>
-          <button class="lang-toggle" id="langBtn" aria-label="Language">
-            AZ
-          </button>
-          <div class="burger" id="burger">
-            <span></span><span></span><span></span>
+      <a href="#" class="logo" id="logo">Tural <span>Allahverdiyev</span></a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">Haqqımda</a></li>
+        <li><a href="#projects">Layihələr</a></li>
+        <li><a href="#contact">Əlaqə</a></li>
+      </ul>
+
+      <div class="actions">
+        <button id="langBtn" class="lang-btn">AZ</button>
+        <div class="cv-menu">
+          <button class="cv-btn" id="cvBtn">CV</button>
+          <div class="cv-dropdown" id="cvDropdown">
+            <a href="files/Tural-Allahverdiyev-CV-AZ.pdf" download>
+              <img
+                src="images/flag-az.png"
+                alt="Azerbaijani Flag"
+                class="flag"
+              />
+              CV (AZ)
+            </a>
+            <a href="files/Tural-Allahverdiyev-CV-EN.pdf" download>
+              <img src="images/flag-uk.png" alt="UK Flag" class="flag" />
+              CV (EN)
+            </a>
           </div>
+        </div>
+        <button id="themeBtn" class="theme-btn">🌙</button>
+        <div class="burger" id="burger">
+          <span></span><span></span><span></span>
         </div>
       </div>
     </nav>
 
-    <!-- Hero -->
-    <header class="hero" data-aos="fade-up">
-      <img src="images/1[1].jpg" alt="Tural Allahverdiyev" class="avatar" />
-      <h1 data-i18n="hero_title">
-        Salam, mən <span class="highlight">Tural Allahverdiyev</span>
-      </h1>
-      <p class="role" data-i18n="hero_role">
-        Fullstack Developer • UI Enthusiast
-      </p>
-      <a href="#projects" class="btn" data-i18n="hero_cta">Layihələrimə bax</a>
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hero-content">
+        <h1>Salam, mən <span>Tural Allahverdiyev</span></h1>
+        <p>Fullstack Developer</p>
+        <a href="#projects" class="cta-btn">Layihələrimə bax</a>
+      </div>
+      
     </header>
 
-    <!-- Haqqımda / About -->
-    <section id="about" class="section" data-aos="fade-up">
-      <h2 data-i18n="about_title">Haqqımda</h2>
-      <p class="about-text" data-i18n="about_text">
-        <!-- Dinamik doldurulacaq (script.js) -->
-      </p>
-    </section>
-
-    <!-- Layihələr / Projects -->
-    <section id="projects" class="section" data-aos="fade-up">
-      <h2 data-i18n="projects_title">Layihələr</h2>
-
-      <div class="project">
-        <img src="./images/gym.png" alt="ShopCO" />
-        <div class="project-info">
-          <h3>IRON GYM</h3>
-          <p data-i18n="proj_shopco_desc">
-            HTML, CSS və JS ilə hazırladığım responsive GYM.
+    <!-- HAQQIMDA -->
+    <section id="about" class="about">
+      <div class="about-content">
+        <img
+          src="images/profile.jpg"
+          alt="Tural Allahverdiyev"
+          class="about-img"
+        />
+        <div class="about-text">
+          <h2>Haqqımda</h2>
+          <p>
+            Mən <strong>Tural Allahverdiyev</strong>, müasir veb
+            texnologiyalarla işləməyi sevən bir Fullstack Developerəm. Məqsədim
+            həm dizayn, həm də funksionallığı birləşdirərək istifadəçilərə
+            estetik və praktik həllər təqdim etməkdir.
           </p>
-          <a
-            href="https://tural-allahverdiyev.github.io/Project_2/"
-            target="_blank"
-            data-i18n="live_demo"
-            >Canlı bax</a
-          >
-        </div>
-      </div>
-
-      <div class="project">
-        <img src="./images/online.png" alt="ShopCO" />
-        <div class="project-info">
-          <h3>E-Market</h3>
-          <p data-i18n="proj_shopco_desc">
-            HTML, CSS və JS ilə hazırladığım responsive GYM.
+          <p>
+            HTML, CSS, JavaScript və React texnologiyaları ilə real layihələr
+            hazırlayıram və hər yeni layihədə özümü bir addım daha
+            təkmilləşdirməyə çalışıram.
           </p>
-          <a
-            href="https://tural-allahverdiyev.github.io/Project_1/"
-            target="_blank"
-            data-i18n="live_demo"
-            >Canlı bax</a
-          >
-        </div>
-      </div>
-
-      <div class="project">
-        <img src="./images/calculator.png" alt="Calculator App" />
-        <div class="project-info">
-          <h3>Calculator</h3>
-          <p data-i18n="proj_calc_desc">
-            JavaScript ilə yazılmış müasir kalkulyator interfeysi.
-          </p>
-          <a
-            href="https://tural-allahverdiyev.github.io/calculator/"
-            target="_blank"
-            data-i18n="live_demo"
-            >Canlı bax</a
-          >
+          <a href="#projects" class="btn-outline">Layihələrimə bax</a>
         </div>
       </div>
     </section>
-
-    <!-- Əlaqə / Contact -->
-    <section id="contact" class="section contact" data-aos="fade-up">
-      <h2 data-i18n="contact_title">Əlaqə</h2>
-      <p data-i18n="contact_text">Gəlin birlikdə əla nəsə yaradaq!</p>
-
-      <div class="contact-buttons">
-        <a href="tel:+994555479988" class="contact-btn" data-i18n="call_btn">
-          📞 Zəng et
-        </a>
-
-        <a
-          href="https://wa.me/994555479988"
-          target="_blank"
-          class="contact-btn"
-          data-i18n="whatsapp_btn"
-        >
-          💬 WhatsApp-da yaz
-        </a>
-
-        <button class="contact-btn" id="emailBtn" data-i18n="email_btn">
-          📧 Email
-        </button>
-
-        <!-- EMAIL QUTUSU -->
-
-        <div id="emailBox" class="email-box">
-          <p id="emailText">tallahverdiyev313@gmail.com</p>
-          <div class="email-actions">
-            <button id="copyEmail" class="mini-btn" data-i18n="copy_email">
-              📋 Kopyala
-            </button>
+    <!-- LAYİHƏLƏR -->
+    <section id="projects" class="projects">
+      <h2>Layihələr</h2>
+      <div class="projects-grid">
+        <!-- Portfolio -->
+        <div class="project-card">
+          <img src="images/portfolio.png" alt="Portfolio Saytı" />
+          <h3>Portfolio Saytı</h3>
+          <p>
+            HTML, CSS və JavaScript ilə hazırlanmış şəxsi portfolio layihəm.
+          </p>
+          <div class="btn-group">
             <a
-              href="mailto:tallahverdiyev313@gmail.com"
-              class="mini-btn"
-              data-i18n="send_email"
-              >📨 Buradan göndər</a
+              href="https://tural-allahverdiyev.github.io/portfolio/"
+              target="_blank"
+              class="btn-outline"
+              >Canlı Bax</a
+            >
+            <a
+              href="https://github.com/Tural-Allahverdiyev/portfolio"
+              target="_blank"
+              class="btn-outline"
+              >GitHub</a
+            >
+          </div>
+        </div>
+
+        <!-- GYM -->
+        <div class="project-card">
+          <img src="images/gym.png" alt="GYM Saytı" />
+          <h3>GYM Saytı</h3>
+          <p>İdman mərkəzi üçün responsive dizaynlı HTML, CSS və JS sayt.</p>
+          <div class="btn-group">
+            <a
+              href="https://tural-allahverdiyev.github.io/Project_2/"
+              target="_blank"
+              class="btn-outline"
+              >Canlı Bax</a
+            >
+            <a
+              href="https://github.com/Tural-Allahverdiyev/Project_2"
+              target="_blank"
+              class="btn-outline"
+              >GitHub</a
+            >
+          </div>
+        </div>
+
+        <!-- Online Market -->
+        <div class="project-card">
+          <img src="images/online.png" alt="Online Market" />
+          <h3>Online Market</h3>
+          <p>
+            Sadə məhsul kataloqu və səbət funksiyası olan HTML, CSS və JS
+            layihəsi.
+          </p>
+          <div class="btn-group">
+            <a
+              href="https://tural-allahverdiyev.github.io/Project_1/"
+              target="_blank"
+              class="btn-outline"
+              >Canlı Bax</a
+            >
+            <a
+              href="https://github.com/Tural-Allahverdiyev/Project_1"
+              target="_blank"
+              class="btn-outline"
+              >GitHub</a
+            >
+          </div>
+        </div>
+
+        <!-- Calculator -->
+        <div class="project-card">
+          <img src="images/calculator.png" alt="Kalkulyator" />
+          <h3>Kalkulyator</h3>
+          <p>
+            Təmiz JavaScript ilə hazırlanmış interaktiv kalkulyator layihəsi.
+          </p>
+          <div class="btn-group">
+            <a
+              href="https://tural-allahverdiyev.github.io/calculator/"
+              target="_blank"
+              class="btn-outline"
+              >Canlı Bax</a
+            >
+            <a
+              href="https://github.com/Tural-Allahverdiyev/calculator"
+              target="_blank"
+              class="btn-outline"
+              >GitHub</a
             >
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="socials">
-        <a href="https://github.com/turaldev" target="_blank">GitHub</a>
-        <a
-          href="https://www.linkedin.com/in/tural-allahverdiyev-b9a4b0150/"
-          target="_blank"
-          >LinkedIn</a
+    <!-- ƏLAQƏ -->
+    <section id="contact" class="contact">
+      <div class="contact-container">
+        <h2>Əlaqə</h2>
+        <p>
+          Mənimlə əlaqə saxlamaq istəyirsinizsə, aşağıdakı formu doldura
+          bilərsiniz 👇
+        </p>
+
+        <form
+          id="contactForm"
+          action="https://formspree.io/f/manlkqnk"
+          method="POST"
+          class="contact-form"
         >
+          <input type="text" name="name" placeholder="Adınız" required />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email ünvanınız"
+            required
+          />
+          <textarea
+            name="message"
+            rows="5"
+            placeholder="Mesajınız..."
+            required
+          ></textarea>
+          <button type="submit" class="btn-send">Göndər</button>
+        </form>
+        <div class="contact-info">
+          <p>Və ya birbaşa əlaqə saxlayın:</p>
+          <a href="tel:+994555479988" class="contact-link">📞 Zəng et</a>
+          <a
+            href="https://wa.me/994555479988?text=Salam%20Tural%20bəy%2C%20sizin%20portfolio%20səhifənizdən%20yazıram."
+            target="_blank"
+            class="contact-link"
+          >
+            💬 WhatsApp ilə yaz
+          </a>
+        </div>
+
+        <div id="formStatus" class="form-status"></div>
       </div>
     </section>
 
-    <footer>
-      <p>© <span id="year"></span> Tural Allahverdiyev</p>
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-content">
+        <p>© 2025 Tural Allahverdiyev. Bütün hüquqlar qorunur.</p>
+        <div class="social-links">
+          <a href="https://github.com/Tural-Allahverdiyev" target="_blank"
+            >GitHub</a
+          >
+          <a href="https://github.com/Tural-Allahverdiyev">Email</a>
+          <a href="https://www.linkedin.com/in/tural-allahverdiyev-b9a4b0150/"
+            >LinkedIn</a
+          >
+        </div>
+      </div>
     </footer>
-    <div class="overlay" id="overlay"></div>
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
