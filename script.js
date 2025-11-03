@@ -62,9 +62,9 @@ const translations = {
     heroBtn: "Layihələrimə bax",
     aboutTitle: "Haqqımda",
     aboutP1:
-      "Mən Tural Allahverdiyev, müasir veb texnologiyalarla işləməyi sevən bir Fullstack Developerəm. Məqsədim həm dizayn, həm də funksionallığı birləşdirərək istifadəçilərə estetik və praktik həllər təqdim etməkdir.",
+      "Mən Tural Allahverdiyev, gecə saatlarında belə kod yazmaqdan zövq alan bir Fullstack Developerəm. Özümü bu sahədə yeni saysam da, sürətlə inkişaf etməyə və hər yazdığım sətirdə daha çox öyrənməyə çalışıram.",
     aboutP2:
-      "HTML, CSS və JavaScript texnologiyaları ilə real layihələr hazırlayıram və hər yeni layihədə özümü bir addım daha təkmilləşdirməyə çalışıram.",
+      "HTML, CSS, JavaScript və React texnologiyaları ilə real layihələr hazırlayıram. Qarşıma məqsəd qoymuşam — Node.js və backend sahəsində də güclənmək və tam çevik layihələr yarada bilmək.",
     aboutP3:
       "Mənim üçün bu, sadəcə kod yazmaq deyil — yeni ideyaları həyata keçirmək, hər dəfə bir az daha yaxşısını bacarmaq deməkdir.",
     aboutBtn: "Layihələrimə bax",
@@ -105,9 +105,9 @@ const translations = {
     heroBtn: "View My Projects",
     aboutTitle: "About Me",
     aboutP1:
-      "I am Tural Allahverdiyev, a Fullstack Developer passionate about modern web technologies. My goal is to combine design and functionality to deliver aesthetic and practical solutions.",
+      "I'm Tural Allahverdiyev — a Fullstack Developer who enjoys coding even late at night. Although I’m still new to the field, I’m constantly learning and improving with every line of code I write.",
     aboutP2:
-      "I build real-world projects with HTML, CSS, and JavaScript, always striving to improve my skills with each project.",
+      "I build real-world projects using HTML, CSS, JavaScript, and React. My goal is to strengthen my skills in Node.js and backend development to create fully dynamic projects.",
     aboutP3:
       "For me, this isn’t just about writing code — it’s about bringing new ideas to life and striving to be a little better with every project.",
     aboutBtn: "View My Projects",
