@@ -95,6 +95,22 @@ const translations = {
     directContact: "Və ya birbaşa əlaqə saxlayın:",
     callText: "📞 Zəng et",
     whatsappText: "💬 WhatsApp ilə yaz",
+    certificatesList: [
+      {
+        title: "CSS (Basic) — HackerRank",
+        desc: "CSS əsasları üzrə HackerRank sertifikatına sahibəm.",
+        btn: "Sertifikata Bax",
+      },
+      {
+        title: "REACT (Basic) — HackerRank",
+        desc: "React əsasları üzrə HackerRank sertifikatına sahibəm.",
+        btn: "Sertifikata Bax",
+      },
+    ],
+    certificates: "Sertifikatlar",
+    projectTitle5: "SHOP.CO E-commerce",
+    projectDesc5:
+      "Modern dizayna sahib HTML, CSS və JavaScript ilə hazırlanmış e-commerce mağaza şablonu.",
   },
   en: {
     about: "About",
@@ -137,6 +153,22 @@ const translations = {
     directContact: "Or contact me directly:",
     callText: "📞 Call",
     whatsappText: "💬 Message on WhatsApp",
+    certificatesList: [
+      {
+        title: "CSS (Basic) — HackerRank",
+        desc: "I am certified in CSS basics by HackerRank.",
+        btn: "View Certificate",
+      },
+      {
+        title: "REACT (Basic) — HackerRank",
+        desc: "I am certified in React basics by HackerRank.",
+        btn: "View Certificate",
+      },
+    ],
+    certificates: "Certificates",
+    projectTitle5: "SHOP.CO E-commerce",
+    projectDesc5:
+      "A modern and minimal e-commerce website template built with HTML, CSS, and JavaScript.",
   },
 };
 
@@ -173,11 +205,33 @@ function applyLanguage(lang) {
   document
     .querySelectorAll(".project-card .btn-outline:last-child")
     .forEach((btn) => (btn.textContent = t.projectBtnGit));
+  // 5th project - SHOP.CO
+  document.querySelectorAll(".project-card h3")[4].textContent =
+    t.projectTitle5;
+  document.querySelectorAll(".project-card p")[4].textContent = t.projectDesc5;
+
+  // Certificates
+  document.querySelector("section.certificates h2").textContent = t.certificates;
+
+
+  // bütün sertifikat kartları
+  const certCards = document.querySelectorAll(".cert-card");
+
+  certCards.forEach((card, index) => {
+    const data = t.certificatesList[index];
+    if (!data) return;
+
+    card.querySelector("h3").textContent = data.title;
+    card.querySelector("p").textContent = data.desc;
+    card.querySelector(".btn-outline").textContent = data.btn;
+  });
 
   // Navbar
   document.querySelector('a[href="#about"]').textContent = t.about;
   document.querySelector('a[href="#projects"]').textContent = t.projects;
   document.querySelector('a[href="#contact"]').textContent = t.contact;
+  document.querySelector('a[href="#certificates"]').textContent =
+    t.certificates;
 
   // Hero
   document.querySelector(
