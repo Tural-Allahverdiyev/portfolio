@@ -173,10 +173,11 @@ const translations = {
 };
 
 const langBtnSwitch = document.getElementById("langBtn");
-let currentLang = "az";
+let currentLang = localStorage.getItem("lang") || "en";
 
 langBtnSwitch.addEventListener("click", () => {
   currentLang = currentLang === "az" ? "en" : "az";
+  localStorage.setItem("lang", currentLang);
   langBtnSwitch.textContent = currentLang.toUpperCase();
   applyLanguage(currentLang);
 });
@@ -211,8 +212,8 @@ function applyLanguage(lang) {
   document.querySelectorAll(".project-card p")[4].textContent = t.projectDesc5;
 
   // Certificates
-  document.querySelector("section.certificates h2").textContent = t.certificates;
-
+  document.querySelector("section.certificates h2").textContent =
+    t.certificates;
 
   // bütün sertifikat kartları
   const certCards = document.querySelectorAll(".cert-card");
@@ -372,4 +373,9 @@ document.addEventListener("DOMContentLoaded", () => {
       status.className = "form-status error";
     }
   });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  applyLanguage(currentLang);
+  langBtnSwitch.textContent = currentLang.toUpperCase();
 });
